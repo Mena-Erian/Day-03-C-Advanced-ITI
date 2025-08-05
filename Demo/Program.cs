@@ -48,8 +48,11 @@ namespace Demo
             //} 
             #endregion
 
-
-
+            #region Indexer
+            Console.WriteLine(employees[1] = new Employee());
+            Console.WriteLine(employees[1]);
+            Console.WriteLine(employees["Hos"]); 
+            #endregion
         }
     }
 }
