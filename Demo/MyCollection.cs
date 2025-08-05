@@ -14,7 +14,32 @@ namespace Day3
         private T[] arr;
         private int currentIndex = -1;
         #endregion
-        
+
+        public T this[int index]
+        {
+            get
+            {
+                return index <= currentIndex ? arr[index] : throw (new ArgumentOutOfRangeException());
+            }
+            set
+            {
+                if (index == arr.Length) Extend();
+                arr[index] = value;
+            }
+        }
+        public T this[string name]
+        {
+            get
+            {
+                if (name == null) return default(T);
+                for (int i = 0; i <= currentIndex; i++)
+                {
+                    if (arr[i].ToString().Contains(name))
+                        return arr[i];
+                }
+                return default(T);
+            }
+        }
         #region Constructors
         public MyCollection()
         {
@@ -48,11 +73,11 @@ namespace Day3
             for (int i = 0; i < arr.Length; i++)
                 Console.WriteLine(arr[i]);
         }
-        
+
         public IEnumerator GetEnumerator()
         {
             return new Iterator(this);
-        } 
+        }
         #endregion
         class Iterator : IEnumerator
         {
